@@ -216,8 +216,8 @@ export default function Installments({ refreshTrigger = 0 }: InstallmentsProps) 
                                             <p className="font-bold text-red-500">{item.remainingAmount.toLocaleString()}</p>
                                         </div>
                                         <div>
-                                            <p className="text-gray-500 text-xs mb-1">قيمة القسط</p>
-                                            <p className="font-bold text-gray-900">{item.paidAmount}</p>
+                                            <p className="text-gray-500 text-xs mb-1">عدد الأقساط</p>
+                                            <p className="font-bold text-gray-900">{item.installmentCount}</p>
                                         </div>
                                     </div>
 
