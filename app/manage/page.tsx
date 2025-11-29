@@ -6,6 +6,7 @@ import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { IoMdAdd } from "react-icons/io";
 import AddInstallmentModal from "@/components/AddInstallmentModal";
 import { useAuth } from "@/utils/contextapi";
+import Image from "next/image";
 
 const ManagePage: React.FC = () => {
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -29,15 +30,23 @@ const ManagePage: React.FC = () => {
                 {/* Header Section */}
                 <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
                     <div className="flex items-center gap-4">
-                        <div className="bg-white p-3 rounded-2xl shadow-sm">
-                            <RiMoneyDollarCircleFill
+                        <div className="">
+                            {/* <RiMoneyDollarCircleFill
                                 className="text-main-color"
                                 size={32}
+                            /> */}
+                            <Image
+                            src="/icon.jpg"
+                            alt=""
+                            width={50}
+                            height={50}
+                            loading="lazy"
+                            className="w-14 h-14 rounded-lg"
                             />
                         </div>
                         <div>
                             <h2 className="text-2xl font-bold text-gray-800">إدارة الأقساط</h2>
-                            <p className="text-gray-500 text-sm">تتبع جميع الأقساط وتحديثها بسهولة</p>
+                            <p className="text-gray-500 text-sm"> أولاد السيد رجب </p>
                         </div>
                     </div>
 
