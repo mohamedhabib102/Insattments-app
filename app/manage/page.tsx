@@ -55,7 +55,7 @@ const ManagePage: React.FC = () => {
                         className="cursor-pointer flex items-center gap-2 bg-main-color text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-600 transition-all shadow-lg shadow-blue-500/30 hover:shadow-blue-500/40 active:scale-95"
                     >
                         <IoMdAdd size={22} />
-                        <span>إضافة قسط جديد</span>
+                        <span> إضافة عميل جديد </span>
                     </button>
                 </div>
 

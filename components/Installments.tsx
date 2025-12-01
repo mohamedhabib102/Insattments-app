@@ -54,7 +54,7 @@ export default function Installments({ refreshTrigger = 0 }: InstallmentsProps) 
         remainingAmount: 0
     });
 
-    const [filter, setFilter] = useState<number>(0);
+
 
     // Payment Modal State
     const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
@@ -65,6 +65,7 @@ export default function Installments({ refreshTrigger = 0 }: InstallmentsProps) 
     const [searchQuery, setSearchQuery] = useState("");
     // Image Preview State
     const [previewImage, setPreviewImage] = useState<string | null>(null);
+    const [activeFilter, setActiveFilter] = useState("all");
 
     const fetchInstallments = async () => {
         if (!userData?.userId) return;
@@ -75,6 +76,7 @@ export default function Installments({ refreshTrigger = 0 }: InstallmentsProps) 
             const data: InstallmentRequest[] = res.data;
             setOriginalInstallments(data);
             setFilteredInstallments(data);
+            setActiveFilter("all");
 
             // Calculate Stats
             const totalCollected = data.reduce((acc, curr) => acc + curr.paidAmount, 0);
@@ -212,16 +214,20 @@ export default function Installments({ refreshTrigger = 0 }: InstallmentsProps) 
                 <div className="flex gap-4">
                     {filterData.map((item, index) => (
                         <button
-                            value={item.value}
+                            key={index}
                             onClick={() => {
-                                GetInstallmentByFilter(item.value)
+                                if (item.value === "all") {
+                                    fetchInstallments();
+                                } else {
+                                    setActiveFilter(item.value);
+                                    GetInstallmentByFilter(item.value);
+                                }
                             }}
-                            key={index} className={
-                                `
-                        ${filter === index ? "bg-blue-500" : "bg-blue-300"}
-                        cursor-pointer px-4 py-2 rounded-lg  text-white
-                        `
-                            }>
+                            className={`
+                                ${activeFilter === item.value ? "bg-blue-500" : "bg-blue-300"}
+                                cursor-pointer px-4 py-2 rounded-lg text-white transition-colors duration-300
+                            `}
+                        >
                             {item.title}
                         </button>
                     ))}
