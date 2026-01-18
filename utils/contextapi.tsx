@@ -40,9 +40,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const cookieOptions = {
-        sameSite: "strict" as const,
+        sameSite: "lax" as const,
         secure: false,
-        path: "/",
         expires: 7
     };
 
@@ -50,7 +49,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         setIsLoading(true);
         setUserData(payload);
 
-        // 🔥 نخزن فقط userId
+  
         Cookies.set("ID", String(payload.userId), cookieOptions);
 
         setIsLoading(false);

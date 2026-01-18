@@ -5,6 +5,7 @@ import { MdAccountBalance, MdLock, MdVisibility, MdVisibilityOff } from 'react-i
 import { FaMoneyCheckAlt } from 'react-icons/fa';
 import api from '@/utils/api';
 import { useAuth } from '@/utils/contextapi';
+import { useRouter } from 'next/navigation';
 
 
 export default function LoginApp() {
@@ -14,6 +15,7 @@ export default function LoginApp() {
     const [showPassword, setShowPassword] = useState(false);
     const [touched, setTouched] = useState<{ username?: boolean; password?: boolean }>({});
     const { login, userData } = useAuth();
+    const router = useRouter();
 
 
     const validatePassword = (pass: string): string | null => {
@@ -65,15 +67,17 @@ export default function LoginApp() {
         e.preventDefault();
         const newErrors: { username?: string; password?: string } = {};
 
-        // التحقق من اسم المستخدم
+ 
         if (!username.trim()) {
             newErrors.username = 'اسم المستخدم مطلوب';
+            return;
         }
 
-        // التحقق من كلمة المرور
+      
         const passwordError = validatePassword(password);
         if (passwordError) {
             newErrors.password = passwordError;
+            return;
         }
 
         setErrors(newErrors);
@@ -104,7 +108,7 @@ export default function LoginApp() {
     useEffect(() => {
         const Id = userData?.userId;
         if (Id) {
-            location.href = "/manage";
+            router.push("/manage");
         }
     }, [userData?.userId]);
 
